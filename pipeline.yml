@@ -1,4 +1,4 @@
-name: My First CI/CD Pipeline
+name: CI/CD Pipeline with Secrets
 
 on:
   push:
@@ -22,5 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Deploy
-        run: echo "Deploying to AWS..."
+      - name: Deploy with secret
+        env:
+          AWS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        run: |
+          echo "Deploying securely..."
+          echo "Secret is hidden: $AWS_KEY"
+          echo "Deployment complete!"
