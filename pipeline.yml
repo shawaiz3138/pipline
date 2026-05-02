@@ -1,4 +1,24 @@
-deploy:
+name: CI/CD Pipeline with Secrets
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: echo "Building application..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Test
+        run: echo "Running tests..."
+
+  deploy:
     runs-on: ubuntu-latest
     needs: test
     steps:
